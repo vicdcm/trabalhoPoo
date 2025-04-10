@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="19f9c968-336f-40ac-be38-e7d1b1da9f10" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Agencia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Cliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Conta.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ContaCorrente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ContaPoupanca.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ContaSalario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Endereco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Funcionario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Gerente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Pessoa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SaldoNegativoException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SenhaErradaException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Transacao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ValorInvalidoException.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Exception" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2vXaJK7U44pyI2fvvZr5KImdfJ2" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="19f9c968-336f-40ac-be38-e7d1b1da9f10" name="Changes" comment="" />
+      <created>1744293800710</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744293800710</updated>
+    </task>
+    <servers />
+  </component>
+</project>
