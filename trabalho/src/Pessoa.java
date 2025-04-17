@@ -40,4 +40,60 @@ public static boolean validaCPF(String cpf) {
     return true;
 }
 
+//funções get
+
+public String getNome()
+{
+    return this.nome;
+}
+
+public String getcpf()
+{
+    return this.cpf;
+}
+
+public String getEstadoCiv()
+{
+    return this.estadoCivil;
+}
+
+public String getDataNasc()
+{
+    return dataNascimento;
+}
+
+public Endereco getEndereco()
+{
+    return this.end;
+}
+
+//funções set
+
+public void setNome(String n)
+{
+    this.nome = n;
+}
+
+public void setcpf(String c)
+{
+    this.cpf = c;
+}
+
+public void setEstadoCiv(String e)
+{
+    this.estadoCivil = e;
+}
+
+public void setDataNasc(String d)
+{
+    this.dataNascimento = d;
+}
+
+public void setEndereco(Endereco e)
+{
+    this.end = e;
+}
+
+
+
 }

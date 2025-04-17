@@ -12,6 +12,13 @@ public abstract class Conta {
     private ArrayList<Cliente> clientes; 
     private ArrayList<Transacao> transacoes;
 
+    /*public Conta (int senha, int nroConta,Agencia ag,float saldo,boolean estaAtiva,Cliente cliente) //construtor caso a conta pertença a apenas um cliente
+    {
+
+    } 
+
+    */
+
 
 
 
@@ -22,5 +29,9 @@ protected static String dataAtual()
 String isoDate = today.format(DateTimeFormatter.ISO_LOCAL_DATE); //converter a data para uma String
  return isoDate; 
 }
+
+
+
+
 
 }
