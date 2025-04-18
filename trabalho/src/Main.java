@@ -1,19 +1,18 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
-/* adicionei funções gets e sets em algumas classes, mudei o encapsulamento de alguns atributos que estavam publicos para protected ou private 
- * criei uma função estatica na classe de clientes que realiza uma busca em um vetor procurando um cliente com um cpf especifico
- * na função main tem um teste de busca de clientes
- * 
- */
 
 public class Main {
+
     public static void main(String[] args) {
 
         ArrayList <Conta> contas =  new ArrayList<>(); //lista de arrays para salvar os objetos
         ArrayList<Cliente> clientes =  new ArrayList<>(); 
         ArrayList<Endereco> enderecos = new ArrayList<>();
         ArrayList<Agencia> agencias = new ArrayList<>();
+
+        Scanner scan = new Scanner(System.in);
 
         Boolean test = Pessoa.validaCPF("131.031.666-04");
 
@@ -64,6 +63,24 @@ Agencia agencia1 = new Agencia();
     Cliente busca1 = Cliente.encontraCliente(clientes,"123.456.789-00");
 
 
-        System.out.println("Hello, World! " + test +" " +teste+ " "+busca.nome+" "+busca1.nome);
+        System.out.println("Hello, World! " + test +" " +teste+ " "+busca.nome+" "+busca1.nome+busca1.cpf+"\n");
+
+        String var = scan.nextLine().trim();
+
+        System.out.println(var);
+
+        busca = Cliente.encontraCliente(clientes,var);
+
+        if(busca == null)
+        {
+            System.err.println("cliente não encontrado");
+        }
+        else
+        {
+            ContaCorrente trem = new ContaCorrente(1234,0000,agencia1,300.5,busca,500,20);
+            System.out.println(trem.getNroConta());
+        }
+
+        
     }
 }
