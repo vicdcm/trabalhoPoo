@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Cliente extends Pessoa
+public class Cliente extends Pessoa implements Serializable
 {
     private String escolaridade;
     private Agencia ag;

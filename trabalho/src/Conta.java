@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 
 
-public abstract class Conta {
+public abstract class Conta implements Serializable{
     private int senha, nroConta;
     private String dataAbertura, dataUltima;
     private Agencia ag;

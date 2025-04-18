@@ -1,4 +1,5 @@
-public class Agencia {
+import java.io.Serializable;
+public class Agencia implements Serializable{
     private int num;
     private String nome;
     private Endereco end;

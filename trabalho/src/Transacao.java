@@ -1,4 +1,5 @@
-public class Transacao {
+import java.io.Serializable;
+public class Transacao implements Serializable{
     private String data, canal, tipo;
     private float val;
     private Conta conta;

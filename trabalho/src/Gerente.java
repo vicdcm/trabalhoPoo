@@ -1,4 +1,6 @@
-public class Gerente extends Funcionario{
+import java.io.Serializable;
+
+public class Gerente extends Funcionario implements Serializable{
     private String dataIngressouGerente;
     private boolean temFormacaoBasica;
     private Agencia ag;

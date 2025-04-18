@@ -1,4 +1,6 @@
-public class Funcionario extends Pessoa{
+import java.io.Serializable;
+
+public class Funcionario extends Pessoa implements Serializable{
     protected int nroCarteiraT, rg, anoIngresso;
     protected String sexo, cargo;
     protected float salario;
