@@ -19,6 +19,61 @@ public abstract class Conta {
 
     */
 
+//gets e sets
+    public int getSenha() {
+        return senha;
+    }
+    public void setSenha(int senha) {
+        this.senha = senha;
+    }
+    public int getNroConta() {
+        return nroConta;
+    }
+    public void setNroConta(int nroConta) {
+        this.nroConta = nroConta;
+    }
+    public String getDataAbertura() {
+        return dataAbertura;
+    }
+    public void setDataAbertura(String dataAbertura) {
+        this.dataAbertura = dataAbertura;
+    }
+    public String getDataUltima() {
+        return dataUltima;
+    }
+    public void setDataUltima(String dataUltima) {
+        this.dataUltima = dataUltima;
+    }
+    public Agencia getAg() {
+        return ag;
+    }
+    public void setAg(Agencia ag) {
+        this.ag = ag;
+    }
+    public float getSaldo() {
+        return saldo;
+    }
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
+    public boolean isEstaAtiva() {
+        return estaAtiva;
+    }
+    public void setEstaAtiva(boolean estaAtiva) {
+        this.estaAtiva = estaAtiva;
+    }
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+    public ArrayList<Transacao> getTransacoes() {
+        return transacoes;
+    }
+    public void setTransacoes(ArrayList<Transacao> transacoes) {
+        this.transacoes = transacoes;
+    }
 
 
 
