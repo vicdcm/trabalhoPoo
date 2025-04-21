@@ -1,5 +1,5 @@
 import java.io.Serializable;
-public class Agencia implements Serializable{
+public class Agencia implements Serializable, Comuns{
     private int num;
     private String nome;
     private Endereco end;
@@ -25,8 +25,8 @@ public class Agencia implements Serializable{
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String n) {
+        this.nome = n;
     }
 
     public Endereco getEnd() {

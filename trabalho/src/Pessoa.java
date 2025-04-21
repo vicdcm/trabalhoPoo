@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public abstract class Pessoa implements Serializable{
+public abstract class Pessoa implements Serializable, Comuns{
     protected String nome, estadoCivil, dataNascimento;
     protected String cpf;
     protected Endereco end;

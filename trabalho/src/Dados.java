@@ -1,5 +1,7 @@
 import java.io.*;
-public class Dados {
+
+//Entra no item b da 5, pois Dados não deve ser instanciada, só necessitamos dos métodos
+public abstract class Dados {
     //leitura
 
     //leitura conta
