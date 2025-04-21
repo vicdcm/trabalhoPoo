@@ -4,8 +4,16 @@ public class Endereco implements Serializable{
     private String estado, cidade, bairro, rua;
     private int num;
 
+    public Endereco(String estado, String cidade, String bairro, String rua, int num) {
+        this.estado = estado;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.rua = rua;
+        this.num = num;
+    }
 
-//gets
+
+    //gets
 
 public String getEstado() {
     return this.estado;

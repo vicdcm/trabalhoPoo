@@ -5,8 +5,20 @@ public abstract class Pessoa implements Serializable{
     protected String cpf;
     protected Endereco end;
 
+    //Só para ter, já que precisa de um construtor de cliente vazio
+    public Pessoa() {
 
-public static boolean validaCPF(String cpf) {
+    }
+
+    public Pessoa(String nome, String estadoCivil, String dataNascimento, String cpf, Endereco end) {
+        this.nome = nome;
+        this.estadoCivil = estadoCivil;
+        this.dataNascimento = dataNascimento;
+        this.cpf = cpf;
+        this.end = end;
+    }
+
+    public static boolean validaCPF(String cpf) {
     cpf = cpf.replaceAll("[^0-9]", ""); //substitui todos os caracters que não são numeros como um espaço vazio
 
     if (cpf.length() != 11) {
