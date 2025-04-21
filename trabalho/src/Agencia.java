@@ -5,6 +5,13 @@ public class Agencia implements Serializable{
     private Endereco end;
     private Gerente ger;
 
+    public Agencia(int num, String nome, Endereco end, Gerente ger) {
+        this.num = num;
+        this.nome = nome;
+        this.end = end;
+        this.ger = ger;
+    }
+
     //gets
     public int getNum() {
         return num;
