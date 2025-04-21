@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Cliente extends Pessoa
+public class Cliente extends Pessoa implements Serializable
 {
     private String escolaridade;
     private Agencia ag;
@@ -10,7 +11,7 @@ public static Cliente encontraCliente(ArrayList<Cliente> clientes,String cpf) //
 {
     for(Cliente buscaCliente : clientes)
     {
-        if(buscaCliente.getcpf() == cpf)
+        if(buscaCliente.getcpf().equals(cpf))
         {
             return buscaCliente;
         }
