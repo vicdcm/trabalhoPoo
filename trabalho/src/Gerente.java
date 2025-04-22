@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Gerente extends Funcionario {
     private String dataIngressouGerente;
@@ -12,12 +13,15 @@ public class Gerente extends Funcionario {
         this.temFormacaoBasica = temFormacaoBasica;
         this.ag = ag;
     }
+    public Gerente()
+    {
+        super();
+    }
 
     //metodo calcular salário do gerente
  @Override
  public float calcularSalario(){
      float salarioGerente;
-     int anosEmpresa = 2025 - anoIngresso;
      salarioGerente = super.calcularSalario();
      return salarioGerente + comissao;
  }
@@ -42,10 +46,32 @@ public Agencia getAg() {
 public void setAg(Agencia ag) {
     this.ag = ag;
 }
+
+    public int getAno()
+    {
+        return anoIngresso;
+    }
+
 public static float getComissao() {
     return comissao;
 }
-public static void setComissao(float comissao) {
-    comissao = comissao;
+    public static void setComissao(float comissao)  
+    {
+    Gerente.comissao = comissao;
+    }
+
+    public static Funcionario encontraFuncionario(ArrayList<Funcionario> funcionarios, String cpf) //função busca um cliente especifico em uma lista de clientes
+{
+    for(Funcionario buscaFuncionario : funcionarios)
+    {
+        if(buscaFuncionario.getcpf().equals(cpf))
+        {
+            return buscaFuncionario;
+        }
+    }
+
+    return null;
+
 }
+
 }
