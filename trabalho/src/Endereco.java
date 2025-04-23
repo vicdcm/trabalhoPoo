@@ -59,7 +59,7 @@ public void setNum(int n)
 }
 
 //função para leitura de um endereço
-public Endereco criaEnd(Scanner scan)
+public static Endereco criaEnd(Scanner scan)
 {
     String rua,bairro,cidade,estado;
     int num;
