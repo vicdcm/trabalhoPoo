@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Scanner;
 
 //Entra no item b da 5, pois Dados não deve ser instanciada, só necessitamos dos métodos
 public abstract class Dados {
@@ -35,5 +36,27 @@ public abstract class Dados {
         {
             System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
         }
+    }
+
+    public static String promptStr(Scanner scan,String str)
+    {
+        System.out.println(str);
+        return scan.nextLine();
+    }
+
+    public static int promptInt(Scanner scan,String str)
+    {
+        System.out.println(str);
+        int res = scan.nextInt();
+        scan.nextLine(); //consome o enter no buffer
+        return res;
+    }
+
+    public static double promptDouble(Scanner scan,String str)
+    {
+        System.out.println(str);
+        double res = scan.nextDouble();
+        scan.nextLine(); //consome o enter no buffer
+        return res;
     }
 }

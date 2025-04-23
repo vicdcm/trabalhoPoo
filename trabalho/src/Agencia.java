@@ -12,6 +12,11 @@ public class Agencia implements Serializable, Comuns{
         this.ger = ger;
     }
 
+    public Agencia()
+    {
+        
+    }
+
     //gets
     public int getNum() {
         return num;

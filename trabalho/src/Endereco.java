@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class Endereco implements Serializable{
     private String estado, cidade, bairro, rua;
@@ -55,6 +56,21 @@ public void setRua(String rua) {
 public void setNum(int n)
 {
     this.num = n;
+}
+
+//função para leitura de um endereço
+public static Endereco criaEnd(Scanner scan)
+{
+    String rua,bairro,cidade,estado;
+    int num;
+    num = Dados.promptInt(scan, "digite o numero da casa:");
+    rua = Dados.promptStr(scan,"digite o nome da rua:");
+    bairro = Dados.promptStr(scan,"digite o nome do bairro:");
+    cidade = Dados.promptStr(scan,"digite o nome da cidade:");
+    estado = Dados.promptStr(scan,"digite o nome do estado:");
+
+
+    return new Endereco(estado,cidade,bairro,rua,num);
 }
 
 }
