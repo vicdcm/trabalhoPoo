@@ -17,6 +17,13 @@ public class Agencia implements Serializable, Comuns{
         
     }
 
+    public String toString() {
+        return "Nome: " + nome +
+               "\nNumero: " + num +
+               "\nEndereço: " + end.toString() +
+               "\nGerente: " + ger.getNome();
+    }
+
     //gets
     public int getNum() {
         return num;

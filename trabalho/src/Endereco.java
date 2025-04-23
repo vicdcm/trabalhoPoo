@@ -13,6 +13,9 @@ public class Endereco implements Serializable{
         this.num = num;
     }
 
+    public String toString() {
+        return rua + ", numero" + num + ", " + bairro + ", " + cidade + ", " + estado;
+    }
 
     //gets
 
