@@ -69,52 +69,112 @@ Agencia agencia1 = new Agencia();
     Endereco end1 = new Endereco("SP","São Paulo","Centro","Avenida Paulista",1000);
     Endereco end2 = new Endereco("RJ","rio de janeiro","copacabana","rua barata ribeiro",200);
     Endereco end3 = new Endereco("MG","belo horizonte","savassi","rua da bahia",500);
-        
-Gerente gerente1 = new Gerente();
-gerente1.setNome("Carlos Silva");
-gerente1.setcpf("111.222.333-44");
-gerente1.setDataNasc("15/03/1980");
-gerente1.setEstadoCiv("Casado");
-gerente1.setEndereco(end1); 
-gerente1.setSexo("Masculino");
-gerente1.setCargo("Gerente Geral");
-gerente1.setSalario(15000.0f);
-gerente1.setAnoIngresso(2015);
-gerente1.setTemFormacaoBasica(true);
+
+Gerente gerente1 = new Gerente(
+        "Carlos Silva",
+        "Casado",
+        "15/03/1980",
+        "111.222.333-44",
+        end1,
+        "Masculino",
+        "9346124/8778",
+        "5304578892",
+        15000.0f,
+        "12/05/2008",
+        true
+        );
 funcionarios.add(gerente1);
 
-
-Gerente gerente2 = new Gerente();
-gerente2.setNome("Ana Costa");
-gerente2.setcpf("555.666.777-88");
-gerente2.setDataDeNascimento("20/08/1990");
-gerente2.setEstadoCiv("Solteira");
-gerente2.setEndereco(end2); 
-gerente2.setSexo("Feminino");
-gerente2.setCargo("Gerente Regional");
-gerente2.setSalario(12000.0f);
-gerente2.setAnoIngresso(2020);
-gerente2.setTemFormacaoBasica(false);
+Gerente gerente2 = new Gerente(
+        "Ana Costa",
+        "Solteira",
+        "20/08/1990",
+        "555.666.777-88",
+        end1,
+        "Feminino",
+        "6438468/2414",
+        "9732452567",
+        12000.0f,
+        "12/12/2020",
+        false
+);
 funcionarios.add(gerente2);
 
-Gerente.setComissao(0.05f); // 5% commission     
+Gerente gerente3 = new Gerente(
+        "Paulo Carlos",
+        "Solteiro",
+        "20/10/1975",
+        "434.598.737-99",
+        end3,
+        "Masculino",
+        "4378918/7834",
+        "872478249",
+        23000.0f,
+        "03/07/2000",
+        true
+);
+funcionarios.add(gerente3);
+
+Gerente.setComissao(0.05f);
+
+        Agencia agenciaCentral = new Agencia(
+                1,
+                "Agencia Central SP",
+                end1,
+                gerente1
+        );
+        agencias.add(agenciaCentral);
+
+        Agencia agenciaCopacabana = new Agencia(
+                2,
+                "Agencia Copacabana",
+                end2,
+                gerente2
+        );
+        agencias.add(agenciaCopacabana);
+
+        Agencia agenciaBH = new Agencia(
+                3,
+                "Agencia Belo Horizonte",
+                end3,
+                gerente3
+        );
+        agencias.add(agenciaBH);
 
 
-Agencia agenciaCentral = new Agencia();
-agenciaCentral.setNum(1);
-agenciaCentral.setNome("Agência Central SP");
-agenciaCentral.setEnd(end1); // São Paulo address
-agenciaCentral.setGer(gerente1); // Assign gerente1
+        //Menu principal, pensei no código em sempre termos as mesmas agencias e gerentes, só rotacionando as contas e clientes
+        System.out.println(
+                "<<< Menu Principal >>>" +
+                "\n" +
+                "\nBem vindo! O que gostaria de fazer?" +
+                "\n[1]Acessar Conta" +
+                "\n[2]Verificar uma Agencia" +
+                "\n"
+        );
+        int op;
+        do {
+            op = Dados.promptInt(scan, "Digite o numero: ");
+        } while (op < 1 || op > 2);
+
+        if(op == 1) {
+            //operações...
+        }
+        else {
+            System.out.println(
+                    "Qual agencia voce quer verificar?" +
+                    "\n[1]De Sao Paulo" +
+                    "\n[2]De Copacabana" +
+                    "\n[3]De Belo Horizonte" +
+                    "\n"
+            );
+            do {
+                op = Dados.promptInt(scan, "Digite o numero: ");
+            } while (op < 1 || op > 3);
+            System.out.println((agencias.get(op-1)).toString());
+        }
 
 
-Agencia agenciaCopacabana = new Agencia();
-agenciaCopacabana.setNum(2);
-agenciaCopacabana.setNome("Agência Copacabana");
-agenciaCopacabana.setEnd(end2); 
-agenciaCopacabana.setGer(gerente2); 
-
-        int op = 1;
-
+          /*
           switch (op) {
 
             case 1:  //teste para criar uma agencia
@@ -131,14 +191,14 @@ agenciaCopacabana.setGer(gerente2);
                 int num = Dados.promptInt(scan,"digite o numero da agencia");
                 String nome = Dados.promptStr(scan, "digite o nome da agencia");
                 Endereco end = Endereco.criaEnd(scan);
-                Agencia novaAg = Agencia()
+                Agencia novaAg = new Agencia(num, nome, end, gerente1);
             } 
                 break;
           
             default:
                 break;
           }
-
+        */
 
         
     }

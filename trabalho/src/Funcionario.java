@@ -2,17 +2,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Funcionario extends Pessoa {
-    protected int nroCarteiraT, rg, anoIngresso;
-    protected String sexo, cargo;
+    protected int anoIngresso;
+    protected String sexo, cargo, nroCarteiraT, rg;
     protected float salario;
 
-    public Funcionario(String nome, String estadoCivil, String dataNascimento, String cpf, Endereco end, int nroCarteiraT, int rg, int anoIngresso, String sexo, String cargo, float salario) {
+    public Funcionario(String nome, String estadoCivil, String dataNascimento, String cpf, Endereco end, String nroCarteiraT, String rg, int anoIngresso, String sexo, String cargo, float salario) {
         super(nome, estadoCivil, dataNascimento, cpf, end);
         this.nroCarteiraT = nroCarteiraT;
         this.rg = rg;
         this.anoIngresso = anoIngresso;
         this.sexo = sexo;
         this.cargo = cargo;
+        this.salario = salario;
+    }
+
+    public Funcionario(String nome, String estadoCivil, String dataNascimento, String cpf, Endereco end, String sexo, String nroCarteiraT, String rg, float salario) {
+        super(nome, estadoCivil, dataNascimento, cpf, end);
+        this.sexo = sexo;
+        this.nroCarteiraT = nroCarteiraT;
+        this.rg = rg;
         this.salario = salario;
     }
 
@@ -44,12 +52,12 @@ public class Funcionario extends Pessoa {
     return null;
 }
 
-public int getNroCarteiraT() 
+public String getNroCarteiraT()
 {
     return nroCarteiraT;
 }
 
-public int getRg() 
+public String getRg()
 {
     return rg;
 }
@@ -75,12 +83,12 @@ public float getSalario()
 }
 
 // Setters
-public void setNroCarteiraT(int nroCarteiraT) 
+public void setNroCarteiraT(String nroCarteiraT)
 {
     this.nroCarteiraT = nroCarteiraT;
 }
 
-public void setRg(int rg) 
+public void setRg(String rg)
 {
     this.rg = rg;
 }

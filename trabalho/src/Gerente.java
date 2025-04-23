@@ -7,12 +7,19 @@ public class Gerente extends Funcionario {
     private Agencia ag;
     private static float comissao; //static pois enunciado
 
-    public Gerente(String nome, String estadoCivil, String dataNascimento, String cpf, Endereco end, int nroCarteiraT, int rg, int anoIngresso, String sexo, String cargo, float salario, String dataIngressouGerente, boolean temFormacaoBasica, Agencia ag) {
+    public Gerente(String nome, String estadoCivil, String dataNascimento, String cpf, Endereco end, String nroCarteiraT, String rg, int anoIngresso, String sexo, String cargo, float salario, String dataIngressouGerente, boolean temFormacaoBasica, Agencia ag) {
         super(nome, estadoCivil, dataNascimento, cpf, end, nroCarteiraT, rg, anoIngresso, sexo, cargo, salario);
         this.dataIngressouGerente = dataIngressouGerente;
         this.temFormacaoBasica = temFormacaoBasica;
         this.ag = ag;
     }
+
+    public Gerente(String nome, String estadoCivil, String dataNascimento, String cpf, Endereco end, String sexo, String nroCarteiraT, String rg, float salario, String dataIngressouGerente, boolean temFormacaoBasica) {
+        super(nome, estadoCivil, dataNascimento, cpf, end, sexo, nroCarteiraT, rg, salario);
+        this.dataIngressouGerente = dataIngressouGerente;
+        this.temFormacaoBasica = temFormacaoBasica;
+    }
+
     public Gerente()
     {
         super();
