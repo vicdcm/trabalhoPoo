@@ -184,13 +184,16 @@ Gerente.setComissao(0.05f);
 
                 switch (subop) {
                     case 1:
-                        System.out.println("Você escolheu sacar.");
+                        System.out.println("<<< Saque >>>");
+                        //FALTA
                         break;
                     case 2:
-                        System.out.println("Você escolheu depositar.");
+                        System.out.println("<<< Deposito >>>");
+                        //FALTA
                         break;
                     case 3:
-                        System.out.println("Você escolheu ver saldo.");
+                        System.out.println("<<< Saldo >>>");
+                        //FALTA
                         break;
                     default:
                         System.out.println("Opção inválida.");
@@ -243,6 +246,7 @@ Gerente.setComissao(0.05f);
                     double taxaAdministrativa = Dados.promptDouble(scan, "Digite a taxa administrativa: ");
 
                     // criar conta
+                    //TEM QUE MUDAR PRA ESCOLHER O TIPO DE CONTA
                     Conta novaConta = new ContaCorrente(senha, nroConta, agSelecionada, saldo, novoCliente, limiteChequeEspecial, taxaAdministrativa);
 
                     // adicionar no banco
