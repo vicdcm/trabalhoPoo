@@ -9,7 +9,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
 
         ArrayList <Conta> contas =  new ArrayList<>(); //lista de arrays para salvar os objetos
-        ArrayList<Cliente> clientes =  new ArrayList<>(); 
+        ArrayList<Cliente> clientes =  new ArrayList<>();
         ArrayList<Endereco> enderecos = new ArrayList<>();
         ArrayList<Agencia> agencias = new ArrayList<>();
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
@@ -141,8 +141,11 @@ Gerente.setComissao(0.05f);
         );
         agencias.add(agenciaBH);
 
+        //para carregar as contas do arquivo
+        Banco.carregarContasDeArquivo("contas_01.dat");
 
         //Menu principal, pensei no código em sempre termos as mesmas agencias e gerentes, só rotacionando as contas e clientes
+        while(true){
         System.out.println(
                 "<<< Menu Principal >>>" +
                 "\n" +
@@ -157,9 +160,101 @@ Gerente.setComissao(0.05f);
         } while (op < 1 || op > 2);
 
         if(op == 1) {
-            //operações...
-        }
-        else {
+            System.out.println("Digite o número da conta que deseja acessar:");
+            int numeroConta = Dados.promptInt(scan, "Número da conta: ");
+            System.out.println("Digite a senha da conta:");
+            int senha = Dados.promptInt(scan, "Senha: ");
+
+            // verificando se a conta existe e se a senha está correta
+            Conta conta = Banco.buscarContaPorNumero(numeroConta, senha);
+            if (conta != null) {
+                System.out.println("Conta encontrada! O que você gostaria de fazer?");
+
+                while (true){
+                System.out.println("O que você quer fazer na conta?" +
+                        "\n[1] Sacar" +
+                        "\n[2] Depositar" +
+                        "\n[3] Ver saldo" +
+                        "\n[4] Voltar ao Menu Principal"
+                );
+                int subop;
+                do {
+                    subop = Dados.promptInt(scan, "Digite o número: ");
+                } while (subop < 1 || subop > 4);
+
+                switch (subop) {
+                    case 1:
+                        System.out.println("Você escolheu sacar.");
+                        break;
+                    case 2:
+                        System.out.println("Você escolheu depositar.");
+                        break;
+                    case 3:
+                        System.out.println("Você escolheu ver saldo.");
+                        break;
+                    default:
+                        System.out.println("Opção inválida.");
+                        continue;
+                }
+                    if (subop == 4){
+                        //PRECISA AJEITAR PRA VOLTAR PRO MENU PRINCIPAL
+                    }
+                }
+
+            } else {
+                System.out.println("Conta não encontrada ou senha incorreta.");
+                System.out.println("O que você deseja fazer agora?");
+                System.out.println("[1] Voltar ao menu anterior");
+                System.out.println("[2] Cadastrar nova conta");
+                int escolha;
+                do {
+                    escolha = Dados.promptInt(scan, "Digite o número: ");
+                } while (escolha != 1 && escolha != 2);
+
+                if (escolha == 1) {
+                    System.out.println("Voltando ao menu anterior...");
+
+                } else if (escolha == 2) {
+                    System.out.println("Cadastro de nova conta:");
+
+                    int nroConta = Dados.promptInt(scan, "Digite o número da nova conta: ");
+                    senha = Dados.promptInt(scan, "Digite a senha da nova conta: ");
+                    double saldo = Dados.promptDouble(scan, "Digite o saldo inicial: ");
+
+                    //escolher agencia
+                    System.out.println("Escolha a agência:");
+                    for (int i = 0; i < agencias.size(); i++) {
+                        System.out.println("[" + (i + 1) + "] " + agencias.get(i).getNome());
+                    }
+                    int agenciaEscolhida;
+                    do {
+                        agenciaEscolhida = Dados.promptInt(scan, "Digite o número da agência: ");
+                    } while (agenciaEscolhida < 1 || agenciaEscolhida > agencias.size());
+                    Agencia agSelecionada = agencias.get(agenciaEscolhida - 1);
+
+                    // criar cliente
+                    System.out.println("Cadastro do cliente:");
+                    String nomeCliente = Dados.promptStr(scan, "Digite o nome do cliente: ");
+                    String cpfCliente = Dados.promptStr(scan, "Digite o CPF do cliente: ");
+                    Cliente novoCliente = new Cliente(nomeCliente, cpfCliente);
+
+                    // pedir o limite e a taxa
+                    double limiteChequeEspecial = Dados.promptDouble(scan, "Digite o limite do cheque especial: ");
+                    double taxaAdministrativa = Dados.promptDouble(scan, "Digite a taxa administrativa: ");
+
+                    // criar conta
+                    Conta novaConta = new ContaCorrente(senha, nroConta, agSelecionada, saldo, novoCliente, limiteChequeEspecial, taxaAdministrativa);
+
+                    // adicionar no banco
+                    Banco.adicionarConta(novaConta);
+                    Banco.salvarContasEmArquivo("contas_01.dat");
+
+                    System.out.println("Conta cadastrada com sucesso!");
+
+                }
+            }
+
+        }else if (op == 2) {
             System.out.println(
                     "Qual agencia voce quer verificar?" +
                     "\n[1]De Sao Paulo" +
@@ -171,10 +266,15 @@ Gerente.setComissao(0.05f);
                 op = Dados.promptInt(scan, "Digite o numero: ");
             } while (op < 1 || op > 3);
             System.out.println((agencias.get(op-1)).toString());
+        } else if (op == 3) {
+                System.out.println("Encerrando o programa...");
+                break;
+            }
         }
 
 
-          /*
+
+/*
           switch (op) {
 
             case 1:  //teste para criar uma agencia
@@ -198,8 +298,8 @@ Gerente.setComissao(0.05f);
             default:
                 break;
           }
-        */
 
+*/
         
     }
 }
