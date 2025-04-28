@@ -39,7 +39,7 @@ public class Main {
             System.out.println("[1] Acessar Conta");
             System.out.println("[2] Verificar uma Agência");
             System.out.println("[3] Encerrar o Programa");
-            System.out.println("[4] Criar Nova Agência"); // <-- nova opção aqui
+            System.out.println("[4] Criar Nova Agência"); 
 
             int op = Dados.promptInt(scan, "Digite o número: ");
 
