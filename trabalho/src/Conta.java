@@ -38,6 +38,30 @@ public abstract class Conta implements Serializable{
         this.transacoes = new ArrayList<>();
         this.clientes = clientes;
     }
+    
+    //add metodos sacar, depositar e getSaldo
+    public boolean sacar(double valor) {
+    if (valor <= saldo) {
+        saldo -= valor;
+        return true;
+    } else {
+        System.out.println("Saldo insuficiente.");
+        return false;
+    }
+}
+
+    public void depositar(double valor) {
+    if (valor > 0) {
+        saldo += valor;
+    } else {
+        System.out.println("Valor de depósito inválido.");
+    }
+}
+
+    public double getSaldo() {
+    return saldo;
+}
+
 
     public void deposito(float val, String canal) throws IllegalArgumentException{
         Transacao nova = new Transacao(this, "deposito", val, canal);
