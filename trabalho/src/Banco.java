@@ -27,6 +27,7 @@ public class Banco {
                     return conta;
                 }
             } catch (SenhaInvalidaException e) {
+                System.out.println(e.getMessage());
             }
         }
         return null;
