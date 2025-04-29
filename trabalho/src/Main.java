@@ -74,7 +74,6 @@ public class Main {
         if (conta != null) {
             acessarMenuConta(scan, conta);
         } else {
-            System.out.println("Conta não encontrada ou senha incorreta.");
             System.out.println("[1] Voltar ao menu anterior\n[2] Cadastrar nova conta");
 
             int escolha = Dados.promptInt(scan, "Digite o número: ");
