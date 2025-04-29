@@ -30,6 +30,7 @@ public class Banco {
                 System.out.println(e.getMessage());
             }
         }
+        System.out.println("Conta nao encontrada");
         return null;
     }
 
