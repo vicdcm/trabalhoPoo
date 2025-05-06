@@ -13,27 +13,24 @@ public class Main {
         ArrayList<Agencia> agencias = new ArrayList<>();
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
 
-        // cadastrando endereços 
-        Endereco end1 = new Endereco("SP", "São Paulo", "Centro", "Avenida Paulista", 1000);
-        Endereco end2 = new Endereco("RJ", "Rio de Janeiro", "Copacabana", "Rua Barata Ribeiro", 200);
-        Endereco end3 = new Endereco("MG", "Belo Horizonte", "Savassi", "Rua da Bahia", 500);
-
-        // cadastrando gerentes 
-        Gerente gerente1 = new Gerente("Carlos Silva", "Casado", "15/03/1980", "111.222.333-44", end1, "Masculino", "9346124/8778", "5304578892", 15000.0f, "12/05/2008", true);
-        Gerente gerente2 = new Gerente("Ana Costa", "Solteira", "20/08/1990", "555.666.777-88", end1, "Feminino", "6438468/2414", "9732452567", 12000.0f, "12/12/2020", false);
-        Gerente gerente3 = new Gerente("Paulo Carlos", "Solteiro", "20/10/1975", "434.598.737-99", end3, "Masculino", "4378918/7834", "872478249", 23000.0f, "03/07/2000", true);
-
-        funcionarios.add(gerente1);
-        funcionarios.add(gerente2);
-        funcionarios.add(gerente3);
+       
 
         Gerente.setComissao(0.05f);
 
-        // criando agências
-        agencias.add(new Agencia(1, "Agência Central SP", end1, gerente1));
-        agencias.add(new Agencia(2, "Agência Copacabana", end2, gerente2));
-        agencias.add(new Agencia(3, "Agência Belo Horizonte", end3, gerente3));
+        // Carregar dados de arquivos
+        contas = (ArrayList<Conta>)Dados.carregarObj("contas_01.dat");
+        clientes = (ArrayList<Cliente>)Dados.carregarObj("clientes.dat");
+        enderecos = (ArrayList<Endereco>)Dados.carregarObj("enderecos.dat");
+        agencias = (ArrayList<Agencia>)Dados.carregarObj("agencias.dat");
+        funcionarios = (ArrayList<Funcionario>)Dados.carregarObj("funcionarios.dat");
+        // Adiciona as contas ao banco
+        for (Conta conta : contas) {
+            Banco.adicionarConta(conta);
+        }
+        // Adiciona os clientes ao banco
+        
 
+      
         while (true) {
             System.out.println("<<< Menu Principal >>>\n");
             System.out.println("[1] Acessar Conta");
@@ -52,6 +49,11 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Encerrando o programa...");
+                    Dados.salvarObj("clientes.dat", clientes);
+                    Dados.salvarObj("enderecos.dat", enderecos);
+                    Dados.salvarObj("agencias.dat", agencias);
+                    Dados.salvarObj("funcionarios.dat", funcionarios);
+
                     return;
                 case 4:
                     criarNovaAgencia(scan, funcionarios, agencias);
@@ -190,4 +192,5 @@ for (Funcionario f : funcionarios) {
             System.out.println("Agência criada com sucesso!");
         }
     }
+
 }
