@@ -18,14 +18,14 @@ public class Main {
         Gerente.setComissao(0.05f);
 
         // Carregar dados de arquivos
-        contas = (ArrayList<Conta>)Dados.carregarObj("src/contas_01.dat");
-        clientes = (ArrayList<Cliente>)Dados.carregarObj("src/clientes.dat");
-        enderecos = (ArrayList<Endereco>)Dados.carregarObj("src/enderecos.dat");
-        agencias = (ArrayList<Agencia>)Dados.carregarObj("src/agencias.dat");
-        funcionarios = (ArrayList<Funcionario>)Dados.carregarObj("src/funcionarios.dat");
+        contas = (ArrayList<Conta>)Dados.carregarObj("contas_01.dat");
+        clientes = (ArrayList<Cliente>)Dados.carregarObj("/clientes.dat");
+        enderecos = (ArrayList<Endereco>)Dados.carregarObj("/enderecos.dat");
+        agencias = (ArrayList<Agencia>)Dados.carregarObj("/agencias.dat");
+        funcionarios = (ArrayList<Funcionario>)Dados.carregarObj("/funcionarios.dat");
         // Adiciona as contas ao banco
 
-//
+
         for (Conta conta : contas) {
             Dados.adicionarConta(conta);
         }
@@ -55,6 +55,7 @@ public class Main {
                     Dados.salvarObj("enderecos.dat", enderecos);
                     Dados.salvarObj("agencias.dat", agencias);
                     Dados.salvarObj("funcionarios.dat", funcionarios);
+                    Dados.salvarObj("contas_01.dat", Dados.getListaDeContas());
 
                     return;
                 case 4:
@@ -76,7 +77,7 @@ public class Main {
         Conta conta = Dados.buscarContaPorNumero(numeroConta, senha);
 
         if (conta != null) {
-            acessarMenuConta(scan, conta);
+            acessarMenuConta(scan, conta, senha);
         } else {
             System.out.println("[1] Voltar ao menu anterior\n[2] Cadastrar nova conta");
 
@@ -88,13 +89,15 @@ public class Main {
     }
 
     // metodo separado para interagir com a conta 
-    private static void acessarMenuConta(Scanner scan, Conta conta) {
+    private static void acessarMenuConta(Scanner scan, Conta conta, int senha) {
+        mostrarResumoClientes(conta, senha);
         while (true) {
             System.out.println("<<< Conta >>>");
             System.out.println("[1] Sacar");
             System.out.println("[2] Depositar");
             System.out.println("[3] Ver saldo");
-            System.out.println("[4] Voltar");
+            System.out.println("[4] Ver mais dados");
+            System.out.println("[5] Voltar");
 
             int op = Dados.promptInt(scan, "Escolha: ");
             switch (op) {
@@ -115,6 +118,12 @@ public class Main {
                     System.out.println("Saldo: R$ " + conta.getSaldo());
                     break;
                 case 4:
+                        System.out.println("Número da conta: " + conta.getNroConta(senha));
+                        System.out.println("Data de abertura: " + conta.getDataAbertura(senha));
+                        System.out.println("Data da última transação: " + conta.getDataUltima(senha));
+                        System.out.println("Agência: " + conta.getAg(senha).getNome()); // supondo que Agência tenha getNome()
+                    break;
+                case 5:
                     return; // ok
                 default:
                     System.out.println("Opção inválida.");
@@ -155,7 +164,7 @@ public class Main {
 
                 ContaCorrente novaConta = new ContaCorrente(senha, nroConta, agSelecionada, saldo, cliente, limiteChequeEspecial, taxaAdministrativa);
                 Dados.adicionarConta(novaConta);
-                Dados.salvarObj("contas_01.dat",contas);
+                Dados.salvarObj("contas_01.dat", Dados.getListaDeContas());
 
                 System.out.println("Conta cadastrada com sucesso!");
                 break;
@@ -164,7 +173,7 @@ public class Main {
                 ContaPoupanca novaContap = new ContaPoupanca(senha, nroConta, agSelecionada, saldo, cliente, RendimentoMesAtual);
 
                 Dados.adicionarConta(novaContap);
-                Dados.salvarObj("contas_01.dat",contas);
+                Dados.salvarObj("contas_01.dat", Dados.getListaDeContas());
 
                 System.out.println("Conta cadastrada com sucesso!");
                 break;
@@ -174,12 +183,25 @@ public class Main {
 
                 ContaSalario novaContaS = new ContaSalario(senha, nroConta, agSelecionada, saldo, cliente, limSaque, limTransacao);
                 Dados.adicionarConta(novaContaS);
-                Dados.salvarObj("contas_01.dat",contas);
+                Dados.salvarObj("contas_01.dat", Dados.getListaDeContas());
 
                 System.out.println("Conta cadastrada com sucesso!");
                 break;
             default:
                 System.out.println("Opção inválida.");
+        }
+    }
+
+    //metodo para mostrar dados do cliente
+    private static void mostrarResumoClientes(Conta conta, int senha) {
+        try {
+            ArrayList<Cliente> clientes = conta.getClientes(senha); // senha 0 se não estiver validando
+            for (Cliente c : clientes) {
+                System.out.println("Nome: " + c.getNome());
+                System.out.println("CPF: " + c.getcpf());
+            }
+        } catch (SenhaInvalidaException e) {
+            System.out.println("Erro ao acessar dados do cliente: " + e.getMessage());
         }
     }
 
