@@ -108,8 +108,7 @@ public abstract class Conta implements Serializable{
     }
 
     // Getters
-    public int getNroConta(int pwd) throws SenhaInvalidaException{
-        if(pwd != this.senha) throw new SenhaInvalidaException("Senha invalida");
+    public int getNroConta() throws SenhaInvalidaException{
         return nroConta;
     }
 

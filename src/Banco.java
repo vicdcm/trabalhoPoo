@@ -21,13 +21,16 @@ public class Banco {
 
     // para buscar conta pelo número e senha
     public static Conta buscarContaPorNumero(int nroConta, int senha) {
+        double buffer;
         for (Conta conta : listaDeContas) {
             try {
-                if (conta.getNroConta(senha) == nroConta) {
+                if (conta.getNroConta() == nroConta) {
+                    buffer = conta.getSaldo(senha);
                     return conta;
                 }
             } catch (SenhaInvalidaException e) {
                 System.out.println(e.getMessage());
+                return null;
             }
         }
         System.out.println("Conta nao encontrada");
