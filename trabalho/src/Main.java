@@ -19,10 +19,10 @@ public class Main {
 
         // Carregar dados de arquivos
         contas = (ArrayList<Conta>)Dados.carregarObj("contas_01.dat");
-        clientes = (ArrayList<Cliente>)Dados.carregarObj("/clientes.dat");
-        enderecos = (ArrayList<Endereco>)Dados.carregarObj("/enderecos.dat");
-        agencias = (ArrayList<Agencia>)Dados.carregarObj("/agencias.dat");
-        funcionarios = (ArrayList<Funcionario>)Dados.carregarObj("/funcionarios.dat");
+        clientes = (ArrayList<Cliente>)Dados.carregarObj("src/clientes.dat");
+        enderecos = (ArrayList<Endereco>)Dados.carregarObj("src/enderecos.dat");
+        agencias = (ArrayList<Agencia>)Dados.carregarObj("src/agencias.dat");
+        funcionarios = (ArrayList<Funcionario>)Dados.carregarObj("src/funcionarios.dat");
         // Adiciona as contas ao banco
 
 
