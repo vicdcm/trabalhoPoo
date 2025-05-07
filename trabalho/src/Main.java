@@ -121,7 +121,7 @@ public class Main {
                         System.out.println("Número da conta: " + conta.getNroConta(senha));
                         System.out.println("Data de abertura: " + conta.getDataAbertura(senha));
                         System.out.println("Data da última transação: " + conta.getDataUltima(senha));
-                        System.out.println("Agência: " + conta.getAg(senha).getNome()); // supondo que Agência tenha getNome()
+                        System.out.println("Agência: " + conta.getAg(senha).getNome());
                     break;
                 case 5:
                     return; // ok
