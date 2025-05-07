@@ -74,7 +74,7 @@ public class Main {
         Conta conta = Banco.buscarContaPorNumero(numeroConta, senha);
 
         if (conta != null) {
-            acessarMenuConta(scan, conta);
+            acessarMenuConta(scan, conta, senha);
         } else {
             System.out.println("[1] Voltar ao menu anterior\n[2] Cadastrar nova conta");
 
@@ -86,13 +86,15 @@ public class Main {
     }
 
     // metodo separado para interagir com a conta 
-    private static void acessarMenuConta(Scanner scan, Conta conta) {
+    private static void acessarMenuConta(Scanner scan, Conta conta, int senha) {
         while (true) {
-            System.out.println("<<< Conta >>>");
+            if(conta.getEstaAtiva(senha)) System.out.println("<<< Conta >>>");
+            else System.out.println("<<< Conta (desativada) >>>");
             System.out.println("[1] Sacar");
             System.out.println("[2] Depositar");
             System.out.println("[3] Ver saldo");
-            System.out.println("[4] Voltar");
+            System.out.println("[4] Desativar conta");
+            System.out.println("[5] Voltar");
 
             int op = Dados.promptInt(scan, "Escolha: ");
             switch (op) {
@@ -113,6 +115,12 @@ public class Main {
                     System.out.println("Saldo: R$ " + conta.getSaldo());
                     break;
                 case 4:
+                    System.out.println("Tem certeza?\n[1]Sim\n[2]Nao");
+                    op = Dados.promptInt(scan, "Escolha: ");
+                    if(op < 1 || op > 2) System.out.println("Opção inválida.");
+                    else if(op == 1) conta.setEstaAtiva(false, senha);
+                    else System.out.println("Ok, voltando...");
+                case 5:
                     return; // ok
                 default:
                     System.out.println("Opção inválida.");
