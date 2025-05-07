@@ -13,7 +13,7 @@ public class Main {
         ArrayList<Agencia> agencias = new ArrayList<>();
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
 
-       
+
 
         Gerente.setComissao(0.05f);
 
@@ -28,15 +28,15 @@ public class Main {
             Banco.adicionarConta(conta);
         }
         // Adiciona os clientes ao banco
-        
 
-      
+
+
         while (true) {
             System.out.println("<<< Menu Principal >>>\n");
             System.out.println("[1] Acessar Conta");
             System.out.println("[2] Verificar uma Agência");
             System.out.println("[3] Encerrar o Programa");
-            System.out.println("[4] Criar Nova Agência"); 
+            System.out.println("[4] Criar Nova Agência");
 
             int op = Dados.promptInt(scan, "Digite o número: ");
 
@@ -88,13 +88,15 @@ public class Main {
     // metodo separado para interagir com a conta 
     private static void acessarMenuConta(Scanner scan, Conta conta, int senha) {
         while (true) {
+            mostrarResumoClientes(conta, senha);
             if(conta.getEstaAtiva(senha)) System.out.println("<<< Conta >>>");
             else System.out.println("<<< Conta (desativada) >>>");
             System.out.println("[1] Sacar");
             System.out.println("[2] Depositar");
             System.out.println("[3] Ver saldo");
             System.out.println("[4] Desativar conta");
-            System.out.println("[5] Voltar");
+            System.out.println("[5] Ver mais dados");
+            System.out.println("[6] Voltar");
 
             int op = Dados.promptInt(scan, "Escolha: ");
             switch (op) {
@@ -121,6 +123,12 @@ public class Main {
                     else if(op == 1) conta.setEstaAtiva(false, senha);
                     else System.out.println("Ok, voltando...");
                 case 5:
+                    System.out.println("Número da conta: " + conta.getNroConta());
+                    System.out.println("Data de abertura: " + conta.getDataAbertura(senha));
+                    System.out.println("Data da última transação: " + conta.getDataUltima(senha));
+                    System.out.println("Agência: " + conta.getAg(senha).getNome());
+                    break;
+                case 6:
                     return; // ok
                 default:
                     System.out.println("Opção inválida.");
@@ -144,18 +152,91 @@ public class Main {
 
         Agencia agSelecionada = agencias.get(indiceAgencia);
 
+//        System.out.println("Essa é uma conta conjunta? ");
+//        System.out.println("[1] Sim");
+//        System.out.println("[2] Nao");
+//        int opcao = Dados.promptInt(scan, "Escolha: ");
+//
+//        ArrayList<Cliente> clientes = new ArrayList<>();
+//
+//        if (opcao == 1) {
+//            System.out.println("Dados do primeiro cliente:");
+//            String nome1 = Dados.promptStr(scan, "Nome: ");
+//            String cpf1 = Dados.promptStr(scan, "CPF: ");
+//            clientes.add(new Cliente(nome1, cpf1));
+//
+//            System.out.println("Dados do segundo cliente:");
+//            String nome2 = Dados.promptStr(scan, "Nome: ");
+//            String cpf2 = Dados.promptStr(scan, "CPF: ");
+//            clientes.add(new Cliente(nome2, cpf2));
+//
+//        }else if (opcao == 2) {
+//            String nome = Dados.promptStr(scan, "Nome do cliente: ");
+//            String cpf = Dados.promptStr(scan, "CPF do cliente: ");
+//            clientes.add(new Cliente(nome, cpf));
+//        }else{
+//            System.out.println("Opção inválida.");
+//            return;
+//        }
+
         String nomeCliente = Dados.promptStr(scan, "Nome do cliente: ");
         String cpfCliente = Dados.promptStr(scan, "CPF do cliente: ");
         Cliente cliente = new Cliente(nomeCliente, cpfCliente);
 
-        double limiteChequeEspecial = Dados.promptDouble(scan, "Limite do cheque especial: ");
-        double taxaAdministrativa = Dados.promptDouble(scan, "Taxa administrativa: ");
+        System.out.println("Que tipo de conta deseja criar? ");
+        System.out.println("[1] Corrente");
+        System.out.println("[2] Poupanca");
+        System.out.println("[3] Salario");
 
-        ContaCorrente novaConta = new ContaCorrente(senha, nroConta, agSelecionada, saldo, cliente, limiteChequeEspecial, taxaAdministrativa);
-        Banco.adicionarConta(novaConta);
-        Banco.salvarContasEmArquivo("contas_01.dat");
+        int op = Dados.promptInt(scan, "Escolha: ");
+        switch (op) {
+            case 1:
 
-        System.out.println("Conta cadastrada com sucesso!");
+                double limiteChequeEspecial = Dados.promptDouble(scan, "Limite do cheque especial: ");
+                double taxaAdministrativa = Dados.promptDouble(scan, "Taxa administrativa: ");
+
+                ContaCorrente novaConta = new ContaCorrente(senha, nroConta, agSelecionada, saldo, cliente, limiteChequeEspecial, taxaAdministrativa);
+                Banco.adicionarConta(novaConta);
+                Banco.salvarContasEmArquivo("contas_01.dat");
+
+                System.out.println("Conta cadastrada com sucesso!");
+                break;
+            case 2:
+                double RendimentoMesAtual = Dados.promptDouble(scan, "Rendimento mensal: ");
+
+                ContaPoupanca novaContap = new ContaPoupanca(senha, nroConta, agSelecionada, saldo, cliente, RendimentoMesAtual);
+                Banco.adicionarConta(novaContap);
+                Banco.salvarContasEmArquivo("contas_01.dat");
+
+                System.out.println("Conta cadastrada com sucesso!");
+                break;
+            case 3:
+                double limSaque = Dados.promptDouble(scan, "Limite de saque: ");
+                double limTransacao = Dados.promptDouble(scan, "Limite de Transacao: ");
+
+                ContaSalario novaContaS = new ContaSalario(senha, nroConta, agSelecionada, saldo, cliente, limSaque, limTransacao);
+                Banco.adicionarConta(novaContaS);
+                Banco.salvarContasEmArquivo("contas_01.dat");
+
+                System.out.println("Conta cadastrada com sucesso!");
+                break;
+            default:
+                System.out.println("Opção inválida.");
+
+        }
+    }
+
+    //metodo para mostrar informações do cliente
+    private static void mostrarResumoClientes(Conta conta, int senha) {
+        try {
+            ArrayList<Cliente> clientes = conta.getClientes(senha);
+            for (Cliente c : clientes) {
+                System.out.println("Nome: " + c.getNome());
+                System.out.println("CPF: " + c.getcpf());
+            }
+        } catch (SenhaInvalidaException e) {
+            System.out.println("Erro ao acessar dados do cliente: " + e.getMessage());
+        }
     }
 
     // metodo para consultar as agências
@@ -179,7 +260,7 @@ Gerente buscaF = null;
 for (Funcionario f : funcionarios) {
     if (f instanceof Gerente) {
         Gerente gerente = (Gerente) f; // cast para Gerente
-        if (gerente.getcpf().equals(buscaCpf)) {  
+        if (gerente.getcpf().equals(buscaCpf)) {
             buscaF = gerente;
             break;
         }
@@ -192,7 +273,7 @@ for (Funcionario f : funcionarios) {
         } else {
             int num = Dados.promptInt(scan, "Digite o número da agência: ");
             String nome = Dados.promptStr(scan, "Digite o nome da agência: ");
-            Endereco end = Endereco.criaEnd(scan); 
+            Endereco end = Endereco.criaEnd(scan);
 
             // cria a nova agência com o gerente encontrado
             Agencia novaAg = new Agencia(num, nome, end, buscaF);
