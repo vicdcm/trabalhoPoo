@@ -52,19 +52,4 @@ public class Banco {
         }
     }
 
-
-//    //ISSO AQUI TA ERRADO
-//    public static void listarContas() {
-//        if (listaDeContas.isEmpty()) {
-//            System.out.println("Não há contas cadastradas.");
-//        } else {
-//            for (Conta conta : listaDeContas) {
-//                try {
-//                    System.out.println("Conta Número: " + conta.getNroConta()); // Exemplo com senha fictícia
-//                } catch (SenhaInvalidaException e) {
-//                    System.out.println("Erro ao acessar conta.");
-//                }
-//            }
-//        }
-//    }
 }

@@ -18,14 +18,16 @@ public class Main {
         Gerente.setComissao(0.05f);
 
         // Carregar dados de arquivos
-        contas = (ArrayList<Conta>)Dados.carregarObj("contas_01.dat");
-        clientes = (ArrayList<Cliente>)Dados.carregarObj("clientes.dat");
-        enderecos = (ArrayList<Endereco>)Dados.carregarObj("enderecos.dat");
-        agencias = (ArrayList<Agencia>)Dados.carregarObj("agencias.dat");
-        funcionarios = (ArrayList<Funcionario>)Dados.carregarObj("funcionarios.dat");
+        contas = (ArrayList<Conta>)Dados.carregarObj("src/contas_01.dat");
+        clientes = (ArrayList<Cliente>)Dados.carregarObj("src/clientes.dat");
+        enderecos = (ArrayList<Endereco>)Dados.carregarObj("src/enderecos.dat");
+        agencias = (ArrayList<Agencia>)Dados.carregarObj("src/agencias.dat");
+        funcionarios = (ArrayList<Funcionario>)Dados.carregarObj("src/funcionarios.dat");
         // Adiciona as contas ao banco
+
+//
         for (Conta conta : contas) {
-            Banco.adicionarConta(conta);
+            Dados.adicionarConta(conta);
         }
         // Adiciona os clientes ao banco
         
@@ -71,7 +73,7 @@ public class Main {
         System.out.println("Digite a senha da conta:");
         int senha = Dados.promptInt(scan, "Senha: ");
 
-        Conta conta = Banco.buscarContaPorNumero(numeroConta, senha);
+        Conta conta = Dados.buscarContaPorNumero(numeroConta, senha);
 
         if (conta != null) {
             acessarMenuConta(scan, conta);
@@ -140,14 +142,45 @@ public class Main {
         String cpfCliente = Dados.promptStr(scan, "CPF do cliente: ");
         Cliente cliente = new Cliente(nomeCliente, cpfCliente);
 
-        double limiteChequeEspecial = Dados.promptDouble(scan, "Limite do cheque especial: ");
-        double taxaAdministrativa = Dados.promptDouble(scan, "Taxa administrativa: ");
+        System.out.println("Que tipo de conta deseja criar? ");
+        System.out.println("[1] Corrente");
+        System.out.println("[2] Poupanca");
+        System.out.println("[3] Salario");
 
-        ContaCorrente novaConta = new ContaCorrente(senha, nroConta, agSelecionada, saldo, cliente, limiteChequeEspecial, taxaAdministrativa);
-        Banco.adicionarConta(novaConta);
-        Banco.salvarContasEmArquivo("contas_01.dat");
+        int op = Dados.promptInt(scan, "Escolha: ");
+        switch (op) {
+            case 1:
+                double limiteChequeEspecial = Dados.promptDouble(scan, "Limite do cheque especial: ");
+                double taxaAdministrativa = Dados.promptDouble(scan, "Taxa administrativa: ");
 
-        System.out.println("Conta cadastrada com sucesso!");
+                ContaCorrente novaConta = new ContaCorrente(senha, nroConta, agSelecionada, saldo, cliente, limiteChequeEspecial, taxaAdministrativa);
+                Dados.adicionarConta(novaConta);
+                Dados.salvarObj("contas_01.dat",contas);
+
+                System.out.println("Conta cadastrada com sucesso!");
+                break;
+            case 2:
+                double RendimentoMesAtual = Dados.promptDouble(scan, "Rendimento mensal: ");
+                ContaPoupanca novaContap = new ContaPoupanca(senha, nroConta, agSelecionada, saldo, cliente, RendimentoMesAtual);
+
+                Dados.adicionarConta(novaContap);
+                Dados.salvarObj("contas_01.dat",contas);
+
+                System.out.println("Conta cadastrada com sucesso!");
+                break;
+            case 3:
+                double limSaque = Dados.promptDouble(scan, "Limite de saque: ");
+                double limTransacao = Dados.promptDouble(scan, "Limite de Transacao: ");
+
+                ContaSalario novaContaS = new ContaSalario(senha, nroConta, agSelecionada, saldo, cliente, limSaque, limTransacao);
+                Dados.adicionarConta(novaContaS);
+                Dados.salvarObj("contas_01.dat",contas);
+
+                System.out.println("Conta cadastrada com sucesso!");
+                break;
+            default:
+                System.out.println("Opção inválida.");
+        }
     }
 
     // metodo para consultar as agências

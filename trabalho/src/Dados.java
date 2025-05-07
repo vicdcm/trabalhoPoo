@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //Entra no item b da 5, pois Dados não deve ser instanciada, só necessitamos dos métodos
@@ -36,6 +37,34 @@ public abstract class Dados {
         {
             System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
         }
+    }
+
+    //para buscar conta por numero e senha
+
+    private static ArrayList<Conta> listaDeContas = new ArrayList<>();
+
+    //para adicionar conta no banco
+    public static void adicionarConta(Conta conta) {
+        listaDeContas.add(conta);
+    }
+
+    //para mostrar a lista de contas
+    public static ArrayList<Conta> getListaDeContas() {
+        return listaDeContas;
+    }
+
+    public static Conta buscarContaPorNumero(int nroConta, int senha) {
+        for (Conta conta : listaDeContas) {
+            try {
+                if (conta.getNroConta(senha) == nroConta) {
+                    return conta;
+                }
+            } catch (SenhaInvalidaException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        System.out.println("Conta nao encontrada");
+        return null;
     }
 
     public static String promptStr(Scanner scan,String str)
