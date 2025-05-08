@@ -50,6 +50,7 @@ public class Main {
                     break;
                 case 3:
                     cadastrarConta(scan, contas, agencias);
+                    break;
                 case 4:
                     System.out.println("Encerrando o programa...");
                     Dados.salvarObj("clientes.dat", clientes);
