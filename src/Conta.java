@@ -27,7 +27,7 @@ public abstract class Conta implements Serializable{
         this.clientes = new ArrayList<Cliente>();
         this.transacoes = new ArrayList<Transacao>();
         clientes.add(cliente);
-
+        this.dataUltima = Conta.dataAtual();
     } 
 
     public Conta (int senha, int nroConta,Agencia ag,double saldo, ArrayList<Cliente> clientes) //construtor caso a conta pertença a n clientes
@@ -40,6 +40,7 @@ public abstract class Conta implements Serializable{
         this.estaAtiva = true;
         this.transacoes = new ArrayList<>();
         this.clientes = clientes;
+        this.dataUltima = Conta.dataAtual();
     }
     
     //add metodos sacar, depositar e getSaldo
@@ -68,43 +69,42 @@ public abstract class Conta implements Serializable{
 
     public void deposito(float val, String canal) throws IllegalArgumentException{
         Transacao nova = new Transacao(this, "deposito", val, canal);
+        dataUltima = Conta.dataAtual();
         this.transacoes.add(nova);
         nova.setOcorreu(true);
         if(val <= 0) throw new IllegalArgumentException("Valor invalido para deposito");
         saldo += val;
-        dataUltima = nova.getdata();
     }
 
     public void saque(int pwd, float val, String canal) throws IllegalArgumentException {
         Transacao nova = new Transacao(this, "saque", val, canal);
+        dataUltima = Conta.dataAtual();
         this.transacoes.add(nova);
         if(pwd != this.senha) throw new SenhaInvalidaException("Senha invalida");
         nova.setOcorreu(true);
         if(val <= 0) throw new IllegalArgumentException("Valor invalido para saque");
         if(saldo - val < 0) throw new IllegalArgumentException("Saldo insuficiente");
         this.setSaldo(saldo-val, pwd);
-        dataUltima = nova.getdata();
     }
 
     public void consulta(int pwd, String canal) {
         Transacao nova = new Transacao(this, "consulta", 0, canal);
+        dataUltima = Conta.dataAtual();
         this.transacoes.add(nova);
         if(pwd != this.senha) throw new SenhaInvalidaException("Senha invalida");
         nova.setOcorreu(true);
         System.out.println("Seu saldo é: " + this.getSaldo(pwd));
-        dataUltima = nova.getdata();
     }
 
     public void pagar(int pwd, float val, String canal, Conta c) throws IllegalArgumentException{
         Transacao nova = new Transacao(this, "pagar", val, canal);
+        dataUltima = Conta.dataAtual();
         this.transacoes.add(nova);
         if(pwd != this.senha) throw new SenhaInvalidaException("Senha invalida");
         nova.setOcorreu(true);
         if(val <= 0) throw new IllegalArgumentException("Valor invalido para saque");
         if(saldo - val < 0) throw new IllegalArgumentException("Saldo insuficiente");
         this.setSaldo(saldo-val, pwd);
-        c.deposito(val, canal);
-        dataUltima = nova.getdata();
     }
 
     // Getters

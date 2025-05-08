@@ -35,8 +35,9 @@ public class Main {
             System.out.println("<<< Menu Principal >>>\n");
             System.out.println("[1] Acessar Conta");
             System.out.println("[2] Verificar uma Agência");
-            System.out.println("[3] Encerrar o Programa");
-            System.out.println("[4] Criar Nova Agência");
+            System.out.println("[3] Cadastrar uma conta");
+            System.out.println("[4] Encerrar o Programa");
+            System.out.println("[5] Criar Nova Agência");
 
             int op = Dados.promptInt(scan, "Digite o número: ");
 
@@ -48,6 +49,8 @@ public class Main {
                     verificarAgencia(scan, agencias);
                     break;
                 case 3:
+                    cadastrarConta(scan, contas, agencias);
+                case 4:
                     System.out.println("Encerrando o programa...");
                     Dados.salvarObj("clientes.dat", clientes);
                     Dados.salvarObj("enderecos.dat", enderecos);
@@ -55,7 +58,7 @@ public class Main {
                     Dados.salvarObj("funcionarios.dat", funcionarios);
 
                     return;
-                case 4:
+                case 5:
                     criarNovaAgencia(scan, funcionarios, agencias);
                     break;
                 default:
@@ -125,7 +128,8 @@ public class Main {
                 case 5:
                     System.out.println("Número da conta: " + conta.getNroConta());
                     System.out.println("Data de abertura: " + conta.getDataAbertura(senha));
-                    System.out.println("Data da última transação: " + conta.getDataUltima(senha));
+                    System.out.print("Data da última transação: ");
+                    System.out.println(conta.getDataUltima(senha));
                     System.out.println("Agência: " + conta.getAg(senha).getNome());
                     break;
                 case 6:
@@ -152,43 +156,30 @@ public class Main {
 
         Agencia agSelecionada = agencias.get(indiceAgencia);
 
-//        System.out.println("Essa é uma conta conjunta? ");
-//        System.out.println("[1] Sim");
-//        System.out.println("[2] Nao");
-//        int opcao = Dados.promptInt(scan, "Escolha: ");
-//
-//        ArrayList<Cliente> clientes = new ArrayList<>();
-//
-//        if (opcao == 1) {
-//            System.out.println("Dados do primeiro cliente:");
-//            String nome1 = Dados.promptStr(scan, "Nome: ");
-//            String cpf1 = Dados.promptStr(scan, "CPF: ");
-//            clientes.add(new Cliente(nome1, cpf1));
-//
-//            System.out.println("Dados do segundo cliente:");
-//            String nome2 = Dados.promptStr(scan, "Nome: ");
-//            String cpf2 = Dados.promptStr(scan, "CPF: ");
-//            clientes.add(new Cliente(nome2, cpf2));
-//
-//        }else if (opcao == 2) {
-//            String nome = Dados.promptStr(scan, "Nome do cliente: ");
-//            String cpf = Dados.promptStr(scan, "CPF do cliente: ");
-//            clientes.add(new Cliente(nome, cpf));
-//        }else{
-//            System.out.println("Opção inválida.");
-//            return;
-//        }
-
+        ArrayList<Cliente> clientes = new ArrayList<>();
         String nomeCliente = Dados.promptStr(scan, "Nome do cliente: ");
         String cpfCliente = Dados.promptStr(scan, "CPF do cliente: ");
         Cliente cliente = new Cliente(nomeCliente, cpfCliente);
+        clientes.add(cliente);
+        int op;
+        while(true) {
+            System.out.println("Mais algum cliente?\n[1]Sim\n[2]Nao");
+            op = Dados.promptInt(scan, "Escolha: ");
+            if(op == 2) break;
+            else if(op == 1) {
+                nomeCliente = Dados.promptStr(scan, "Nome do cliente: ");
+                cpfCliente = Dados.promptStr(scan, "CPF do cliente: ");
+                cliente = new Cliente(nomeCliente, cpfCliente);
+                clientes.add(cliente);
+            } else System.out.println("Opcao invalida");
+        }
 
         System.out.println("Que tipo de conta deseja criar? ");
         System.out.println("[1] Corrente");
         System.out.println("[2] Poupanca");
         System.out.println("[3] Salario");
 
-        int op = Dados.promptInt(scan, "Escolha: ");
+        op = Dados.promptInt(scan, "Escolha: ");
         switch (op) {
             case 1:
 
