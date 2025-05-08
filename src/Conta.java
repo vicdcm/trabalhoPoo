@@ -30,7 +30,7 @@ public abstract class Conta implements Serializable{
         this.dataUltima = Conta.dataAtual();
     } 
 
-    public Conta (int senha, int nroConta,Agencia ag,double saldo, ArrayList<Cliente> clientes) //construtor caso a conta pertença a n clientes
+    public Conta (int senha, int nroConta, Agencia ag, double saldo, ArrayList<Cliente> clientes) //construtor caso a conta pertença a n clientes
     {
         this.senha = senha;
         this.nroConta =nroConta;

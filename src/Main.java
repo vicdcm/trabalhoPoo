@@ -50,6 +50,7 @@ public class Main {
                     break;
                 case 3:
                     cadastrarConta(scan, contas, agencias);
+                    break;
                 case 4:
                     System.out.println("Encerrando o programa...");
                     Dados.salvarObj("clientes.dat", clientes);
@@ -125,12 +126,14 @@ public class Main {
                     if(op < 1 || op > 2) System.out.println("Opção inválida.");
                     else if(op == 1) conta.setEstaAtiva(false, senha);
                     else System.out.println("Ok, voltando...");
+                    break;
                 case 5:
                     System.out.println("Número da conta: " + conta.getNroConta());
                     System.out.println("Data de abertura: " + conta.getDataAbertura(senha));
                     System.out.print("Data da última transação: ");
                     System.out.println(conta.getDataUltima(senha));
                     System.out.println("Agência: " + conta.getAg(senha).getNome());
+                    mostrarResumoClientes(conta, senha);
                     break;
                 case 6:
                     return; // ok
@@ -186,7 +189,7 @@ public class Main {
                 double limiteChequeEspecial = Dados.promptDouble(scan, "Limite do cheque especial: ");
                 double taxaAdministrativa = Dados.promptDouble(scan, "Taxa administrativa: ");
 
-                ContaCorrente novaConta = new ContaCorrente(senha, nroConta, agSelecionada, saldo, cliente, limiteChequeEspecial, taxaAdministrativa);
+                ContaCorrente novaConta = new ContaCorrente(senha, nroConta, agSelecionada, saldo, clientes, limiteChequeEspecial, taxaAdministrativa);
                 Banco.adicionarConta(novaConta);
                 Banco.salvarContasEmArquivo("contas_01.dat");
 
@@ -195,7 +198,7 @@ public class Main {
             case 2:
                 double RendimentoMesAtual = Dados.promptDouble(scan, "Rendimento mensal: ");
 
-                ContaPoupanca novaContap = new ContaPoupanca(senha, nroConta, agSelecionada, saldo, cliente, RendimentoMesAtual);
+                ContaPoupanca novaContap = new ContaPoupanca(senha, nroConta, agSelecionada, saldo, clientes, RendimentoMesAtual);
                 Banco.adicionarConta(novaContap);
                 Banco.salvarContasEmArquivo("contas_01.dat");
 
@@ -205,7 +208,7 @@ public class Main {
                 double limSaque = Dados.promptDouble(scan, "Limite de saque: ");
                 double limTransacao = Dados.promptDouble(scan, "Limite de Transacao: ");
 
-                ContaSalario novaContaS = new ContaSalario(senha, nroConta, agSelecionada, saldo, cliente, limSaque, limTransacao);
+                ContaSalario novaContaS = new ContaSalario(senha, nroConta, agSelecionada, saldo, clientes, limSaque, limTransacao);
                 Banco.adicionarConta(novaContaS);
                 Banco.salvarContasEmArquivo("contas_01.dat");
 
